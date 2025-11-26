@@ -1,0 +1,10 @@
+<% status_class = case status
+                  when "received" then "badge-primary"
+                  when "preparing" then "badge-secondary"
+                  when "packing" then "badge-accent"
+                  when "ready_for_pickup" then "badge-info"
+                  when "delivered" then "badge-success"
+                  when "canceled" then "badge-neutral"
+                  end
+%>
+<%= tag.span status, class: class_names("badge", status_class) %>

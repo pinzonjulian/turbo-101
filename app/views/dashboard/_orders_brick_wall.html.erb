@@ -1,0 +1,8 @@
+<article>
+  <h2 class="text-4xl font-bold"><%= title %></h2>
+  <div class="flex gap-4 flex-wrap mt-4">
+    <% orders.each do |order| %>
+      <%= tag.span number_with_delimiter(order.id), id: dom_id(order), class: "badge badge-xl badge-neutral badge-outline" %>
+    <% end %>
+  </div>
+</article>

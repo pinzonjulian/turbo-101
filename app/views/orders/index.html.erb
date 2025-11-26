@@ -1,0 +1,55 @@
+<div class="mb-6">
+  <%= form_with url: orders_path, method: :get do |form| %>
+    <div class="flex gap-4 mb-4">
+      <div>
+        <%= form.label :by_id, "Order ID", class: "label" %>
+        <%= form.number_field :by_id, placeholder: "Enter order ID", class: "input" %>
+      </div>
+      <div>
+        <%= form.label :by_status, "Status", class: "label" %>
+        <%= form.select :by_status, options_for_select(Order.statuses, selected: params[:by_status]), { include_blank: "All" }, { class: "select" } %>
+      </div>
+      <div>
+        <%= form.label :by_customer_name, "Customer Name", class: "label" %>
+        <%= form.text_field :by_customer_name, value: params[:by_customer_name], placeholder: "Enter customer name", class: "input" %>
+      </div>
+      <div>
+        <div class="h-6"></div>
+        <%= form.submit "Search", class: "btn btn-primary" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="flex justify-between">
+  <p>Showing page <%= @page.number %> of <%= @page.recordset.page_count %> (<%= @page.recordset.records_count %> total orders):</p>
+  <div class="join">
+    <% unless @page.first? %>
+      <%= link_to orders_path(page: @page.next_param - 2), class: "btn btn-sm rounded-full" do %>
+        <%= chevron_left %>
+      <% end %>
+    <% end %>
+    <% unless @page.last? %>
+      <%= link_to orders_path(page: @page.next_param), class: "btn btn-sm rounded-full" do %>
+        <%= chevron_right %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<div class="overflow-x-auto w-full">
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Order #</th>
+      <th>Customer</th>
+      <th>Status</th>
+      <th>Created at</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <%= render @page.records %>
+    </tbody>
+  </table>
+</div>

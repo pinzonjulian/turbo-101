@@ -1,3 +1,11 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
+import debounced from 'debounced'
+
+debounced.initialize()
+
+Turbo.StreamActions.visit = function(){
+  Turbo.cache.clear();
+  Turbo.visit(this.target)
+}

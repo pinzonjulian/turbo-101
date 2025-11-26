@@ -1,0 +1,16 @@
+<% identifier = dom_target(order, order.customer, :insights) %>
+<button type="button"
+        class="btn btn-link"
+        commandfor="<%= identifier %>"
+        command="show-popover"
+        style="anchor-name:--anchor-<%= identifier %>">
+  <%= order.customer.name %>
+</button>
+<div class="dropdown card p-4 w-52 rounded-box bg-base-100 shadow-sm"
+     popover
+     id="<%= identifier %>"
+     style="position-anchor:--anchor-<%= identifier %>; position-try-fallbacks: flip-block, flip-inline;">
+  <%= turbo_frame_tag order.customer, :insights,
+                      src: customer_order_insights_path(order.customer),
+                      loading: :lazy %>
+</div>
