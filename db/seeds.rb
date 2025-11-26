@@ -1,9 +1,93 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+customer_list = [
+  {name: "James", preferences: "Prefers navy blue boxes with gold ribbon. Leave at front door only."},
+  {name: "Robert", preferences: "Loves eco-friendly kraft boxes with twine. Side gate delivery preferred."},
+  {name: "Michael", preferences: "Minimalist black box with no ribbon. Ring doorbell and wait."},
+  {name: "William", preferences: "Red velvet boxes with silver ribbon for special occasions. Signature required."},
+  {name: "David", preferences: "Simple white boxes with green satin ribbon. Leave in mail box if fits."},
+  {name: "Richard", preferences: "Vintage brown kraft with burlap ribbon. Back porch is fine."},
+  {name: "Joseph", preferences: "Sleek matte black with rose gold accents. Discreet delivery appreciated."},
+  {name: "Thomas", preferences: "Cream colored boxes with burgundy ribbon. Covered porch delivery."},
+  {name: "Charles", preferences: "Dark green boxes with gold trim. Neighbor accepted for pickup."},
+  {name: "Christopher", preferences: "Recycled paper with jute twine. No specific delivery preference."},
+  {name: "Matthew", preferences: "White boxes with blue ribbon and bow. Leave under welcome mat if needed."},
+  {name: "Anthony", preferences: "Charcoal gray with silver ribbon. Safe place in garage preferred."},
+  {name: "Mark", preferences: "Bright yellow boxes with colorful ribbon mix. Visible from street."},
+  {name: "Donald", preferences: "Classic red box with white ribbon. Requires signature always."},
+  {name: "Steven", preferences: "Minimalist kraft with minimal packaging. Hand to recipient if possible."},
+  {name: "Paul", preferences: "Elegant white with navy ribbon and pearl accents. Protected from weather."},
+  {name: "Andrew", preferences: "Black boxes with rose gold ribbon. Side yard delivery is best."},
+  {name: "Joshua", preferences: "Pastel pink boxes with gold twine. Decorated appearance welcome."},
+  {name: "Kenneth", preferences: "Forest green with copper ribbon. Back entrance preferred."},
+  {name: "Eugene", preferences: "Vintage-style boxes with wax seal ribbon. Porch or stoop delivery."},
+  {name: "Ralph", preferences: "Silver boxes with gray ribbon. Garage storage spot available."},
+  {name: "Bernard", preferences: "Striped boxes with colorful bows. Living room adjacent to entrance."},
+  {name: "Clyde", preferences: "Textured kraft with burlap and twine. Side porch location."},
+  {name: "Eddie", preferences: "Deep purple boxes with lavender ribbon. Under covered area preferred."},
+  {name: "Fredrick", preferences: "Metallic gold boxes with champagne ribbon. Front entrance welcome mat."},
+  {name: "Jay", preferences: "Matte black with minimalist ribbon. Discrete placement requested."},
+  {name: "Jim", preferences: "Rustic brown with rope and twine. Workshop area delivery acceptable."},
+  {name: "Juan", preferences: "Bright turquoise boxes with coral ribbon. Vibrant aesthetic preferred."},
+  {name: "Patricia", preferences: "Rose pink boxes with white ribbon bow. Delicate wrapping appreciated."},
+  {name: "Jennifer", preferences: "Elegant ivory with blush ribbon accents. Silk ribbon preferred over satin."},
+  {name: "Linda", preferences: "Soft lavender with lilac ribbon. Decorative presentation important."},
+  {name: "Barbara", preferences: "Deep burgundy boxes with gold leaf detail. Protected placement needed."},
+  {name: "Elizabeth", preferences: "Classic white with pearls and lace ribbon. Premium packaging expected."},
+  {name: "Susan", preferences: "Cream colored with champagne gold ribbon. Elegant and understated."},
+  {name: "Jessica", preferences: "Blush pink with rose gold ribbon. Instagram-worthy presentation."},
+  {name: "Sarah", preferences: "Soft sage green with cream ribbon. Minimalist luxury aesthetic."},
+  {name: "Karen", preferences: "Traditional red and gold boxes. Holiday-style wrapping year-round."},
+  {name: "Lisa", preferences: "Charcoal gray with metallic silver ribbon. Modern and sleek."},
+  {name: "Betty", preferences: "Classic kraft with red ribbon bow. Vintage charm preferred."},
+  {name: "Margaret", preferences: "Pale blue boxes with silver twine. Timeless elegance wanted."},
+  {name: "Sandra", preferences: "Emerald green with gold ribbon. Jewel-tone aesthetic loved."},
+  {name: "Ashley", preferences: "Millennial pink boxes with minimalist ribbon. Modern design preferred."},
+  {name: "Kimberly", preferences: "Coral boxes with gold accents and ribbon. Tropical vibes appreciated."},
+  {name: "Emily", preferences: "Soft white with dusty rose ribbon and bow. Garden aesthetic welcome."},
+  {name: "Donna", preferences: "Navy blue boxes with gold foil trim. Traditional elegance appreciated."},
+  {name: "Michelle", preferences: "Luxury black with rose gold ribbon. Premium unboxing experience valued."},
+  {name: "Carol", preferences: "Bright white boxes with colorful rainbow ribbon. Cheerful presentation."},
+  {name: "Amanda", preferences: "Blush gold boxes with silk ribbon and pearl details. Upscale preferred."},
+  {name: "Melissa", preferences: "Matte emerald with copper ribbon accents. Earthy luxury style."},
+  {name: "Deborah", preferences: "Soft pink with delicate lace ribbon. Romantic aesthetic appreciated."},
+  {name: "Stephanie", preferences: "Sleek metallic with minimalist ribbon. Contemporary design loved."},
+  {name: "Rebecca", preferences: "Warm cream with burgundy velvet ribbon. Sophisticated look wanted."},
+  {name: "Sharon", preferences: "Classic navy with white ribbon bow. Timeless presentation preferred."},
+  {name: "Laura", preferences: "Soft sage with natural twine and dried flowers. Eco-chic aesthetic."},
+  {name: "Cynthia", preferences: "Deep plum boxes with silver ribbon. Luxurious wrapping appreciated."},
+  {name: "Amy", preferences: "Turquoise boxes with natural jute rope. Bohemian style preferred."},
+  {name: "Angela", preferences: "Gold leaf boxes with champagne ribbon. Glamorous packaging wanted."},
+  {name: "Shirley", preferences: "Vintage-inspired kraft with wax ribbon seal. Retro charm appreciated."},
+  {name: "Anna", preferences: "White boxes with gold pearl ribbon. Elegant and timeless style."},
+  {name: "Brenda", preferences: "Deep red with gold foil detail and ribbon. Festive year-round."},
+  {name: "Pamela", preferences: "Cream with lace ribbon accents. Refined and delicate preferred."},
+  {name: "Emma", preferences: "Soft blush with rose gold ribbon bow. Feminine and sophisticated."},
+  {name: "Nicole", preferences: "Charcoal with rose gold accents and ribbon. Modern luxury style."},
+  {name: "Helen", preferences: "Classic white with silver ribbon and pearls. Timeless elegance."},
+  {name: "Katherine", preferences: "Navy boxes with gold ribbon and monogram space. Upscale preference."},
+  {name: "Christine", preferences: "Pale pink with silk ribbon and bow. Graceful presentation wanted."},
+  {name: "Debra", preferences: "Emerald green with gold trim ribbon. Rich jewel-tone aesthetic."},
+  {name: "Rachel", preferences: "Blush boxes with rose ribbon and dried botanicals. Natural luxury."},
+  {name: "Catherine", preferences: "Deep burgundy with gold leaf and ribbon. Premium feel wanted."},
+  {name: "Carolyn", preferences: "Soft white with lavender satin ribbon. Calming aesthetic preferred."},
+  {name: "Janet", preferences: "Classic kraft with red twine bow. Simple and charming style."},
+  {name: "Ruth", preferences: "Warm tan boxes with bronze ribbon accents. Earthy sophistication."},
+  {name: "Maria", preferences: "Vibrant coral boxes with gold ribbon. Warm and welcoming colors."},
+  {name: "Diane", preferences: "Pale yellow with sunflower ribbon. Cheerful and bright presentation."},
+  {name: "Virginia", preferences: "Soft lavender with purple ribbon and bow. Calming luxury vibe."},
+  {name: "Julie", preferences: "Cream with peach satin ribbon and pearls. Soft elegance appreciated."},
+  {name: "Joyce", preferences: "Deep plum with silver ribbon and snowflake accents. Seasonal favorite."},
+  {name: "Victoria", preferences: "Midnight blue with gold crown ribbon detail. Royal aesthetic preferred."},
+  {name: "Olivia", preferences: "Sage green with eucalyptus twine. Botanical luxury appreciated."},
+  {name: "Kelly", preferences: "Hot pink boxes with silver ribbon bow. Bold and vibrant style."},
+  {name: "Christina", preferences: "Soft peach with rose gold ribbon accents. Warm and sophisticated."},
+  {name: "Lauren", preferences: "Pale mint with copper ribbon detail. Fresh and modern aesthetic."},
+].freeze
+
+Customer.upsert_all(customer_list)
+customers = Customer.all
+
+10.times { Order.create customer: Customer.all.sample, status: :received, created_at: it.minutes.ago, updated_at: it.minutes.ago }
+8.times { Order.create customer: Customer.all.sample, status: :preparing, created_at: it.minutes.ago, updated_at: it.minutes.ago }
+8.times { Order.create customer: Customer.all.sample, status: :packing, created_at: it.minutes.ago, updated_at: it.minutes.ago }
+7.times { Order.create customer: Customer.all.sample, status: :ready_for_pickup, created_at: it.minutes.ago, updated_at: it.minutes.ago }
+1000.times { Order.create customer: Customer.all.sample, status: :delivered, created_at: it.minutes.ago, updated_at: it.minutes.ago }

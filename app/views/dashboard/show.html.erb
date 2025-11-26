@@ -1,0 +1,24 @@
+<%= turbo_stream_from "dashboard" %>
+<%= content_for :head do  %>
+  <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+<% end %>
+
+<div class="flex gap-12">
+  <div class="space-y-12">
+    <%= render "orders_brick_wall",
+               title: "Received",
+               orders: @orders.received  %>
+    <%= render "orders_brick_wall",
+               title: "Preparing",
+               orders: @orders.preparing  %>
+    <%= render "orders_brick_wall",
+               title: "Packing",
+               orders: @orders.packing  %>
+
+  </div>
+  <div>
+    <%= render "orders_brick_wall",
+               title: "Pick up",
+               orders: @orders.ready_for_pickup  %>
+  </div>
+</div>

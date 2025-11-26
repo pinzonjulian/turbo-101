@@ -1,0 +1,47 @@
+<% actions_identifier = dom_target(order, :actions) %>
+<% cancellations_identifier = dom_target(order, :cancellations) %>
+<% details_identifier = dom_target(order, :details) %>
+
+<button type="button"
+        class="btn btn-ghost rounded-full btn-sm"
+        commandfor="popover-<%= actions_identifier %>"
+        command="show-popover"
+        style="anchor-name:--anchor-<%= actions_identifier %>">
+  <%= ellipsis_vertical %>
+</button>
+<ul class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+    popover id="popover-<%= actions_identifier %>"
+    style="position-anchor:--anchor-<%= actions_identifier %>; position-try-fallbacks: flip-block, flip-inline;">
+  <li>
+    <button type="button"
+            class="menu-item"
+            commandfor="<%= details_identifier %>"
+            command="show-modal">
+      Order details
+    </button>
+  </li>
+  <li>
+    <button type="button"
+            class="menu-item"
+            commandfor="<%= cancellations_identifier %>"
+            command="show-modal">
+      Cancel order
+    </button>
+  </li>
+</ul>
+
+<dialog class="modal" id=<%= cancellations_identifier %>>
+  <div class="modal-box">
+    <%= turbo_frame_tag order, :cancellation,
+                        src: new_order_cancellations_path(order),
+                        loading: :lazy %>
+  </div>
+</dialog>
+
+<dialog class="modal modal-end" id=<%= details_identifier %>>
+  <div class="modal-box max-w-1/2">
+    <%= turbo_frame_tag order, :details,
+                        src: order_details_path(order),
+                        loading: :lazy %>
+  </div>
+</dialog>

@@ -10,15 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 1) do
-  create_table "solid_cache_entries", force: :cascade do |t|
-    t.integer "byte_size", limit: 4, null: false
+ActiveRecord::Schema[8.1].define(version: 2025_11_27_042226) do
+  create_table "customers", force: :cascade do |t|
     t.datetime "created_at", null: false
-    t.binary "key", limit: 1024, null: false
-    t.integer "key_hash", limit: 8, null: false
-    t.binary "value", limit: 536870912, null: false
-    t.index ["byte_size"], name: "index_solid_cache_entries_on_byte_size"
-    t.index ["key_hash", "byte_size"], name: "index_solid_cache_entries_on_key_hash_and_byte_size"
-    t.index ["key_hash"], name: "index_solid_cache_entries_on_key_hash", unique: true
+    t.string "name"
+    t.string "preferences"
+    t.datetime "updated_at", null: false
   end
+
+  create_table "orders", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "customer_id", null: false
+    t.string "status"
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
+  add_foreign_key "orders", "customers"
 end

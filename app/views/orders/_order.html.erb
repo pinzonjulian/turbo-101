@@ -1,0 +1,9 @@
+<tr>
+  <td><%= order.id %></td>
+  <td><%= render "customer_insights_popover", order: %></td>
+  <td><%= render "orders/status", status: order.status %></td>
+  <td><%= order.created_at %></td>
+  <td>
+    <%= render "actions_menu", order: %>
+  </td>
+</tr>
