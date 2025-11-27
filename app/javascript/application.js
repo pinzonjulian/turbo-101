@@ -5,7 +5,3 @@ import debounced from 'debounced'
 
 debounced.initialize()
 
-Turbo.StreamActions.visit = function(){
-  Turbo.cache.clear();
-  Turbo.visit(this.target)
-}
