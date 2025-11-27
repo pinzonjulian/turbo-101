@@ -5,11 +5,7 @@ class Orders::CancellationsController < ApplicationController
 
   def create
     @order.update(status: "canceled")
-    path = orders_path
-    respond_to do |format|
-      format.html { redirect_to path }
-      format.turbo_stream { render turbo_stream: turbo_stream.action(:visit, path)}
-    end
+    redirect_to orders_path
   end
 
   private

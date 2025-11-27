@@ -1,25 +1,10 @@
-<% cancellation_identifier = dom_target(@order, :cancellations) %>
+<div class="flex items-center justify-between mb-6">
+  <h2 class="font-bold text-xl">Cancel Order</h2>
+</div>
 
-<%= turbo_frame_tag @order, :cancellation do  %>
-  <div class="flex items-center justify-between mb-6">
-    <h2 class="font-bold text-xl">Cancel Order</h2>
-    <button type="button"
-            command="close"
-            commandfor="<%= cancellation_identifier %>"
-            class="btn btn-sm btn-circle btn-ghost">✕</button>
+<p class="mb-6 text-base">Are you sure you want to cancel this order? This action cannot be undone.</p>
+
+<%= form_with url: order_cancellations_path(@order), method: :post do |form| %>
+  <%= form.button "Cancel Order", class: "btn btn-error" %>
   </div>
-
-  <p class="mb-6 text-base">Are you sure you want to cancel this order? This action cannot be undone.</p>
-
-  <%= form_with url: order_cancellations_path(@order), method: :post do |form| %>
-    <div class="flex gap-3 justify-end">
-      <button type="button"
-              command="close"
-              commandfor="<%= cancellation_identifier %>"
-              class="btn btn-ghost">
-        Go Back
-      </button>
-      <%= form.button "Cancel Order", class: "btn btn-error", formmethod: :dialog %>
-    </div>
-  <% end %>
 <% end %>
